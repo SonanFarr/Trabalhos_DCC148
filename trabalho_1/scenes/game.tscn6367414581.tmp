@@ -48,3 +48,6 @@ position = Vector2(564, 461.00003)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("5_iywne")
 speed = 300.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(40, -453.33344)

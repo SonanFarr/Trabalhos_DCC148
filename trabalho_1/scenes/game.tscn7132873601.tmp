@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://db88qenmcigx5"]
+[gd_scene load_steps=7 format=3 uid="uid://db88qenmcigx5"]
 
 [ext_resource type="PackedScene" uid="uid://bseo5mq2oq0d2" path="res://scenes/cenario.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://bvfafrvsbg4qm" path="res://assets/scenario_day/sky.png" id="2_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cwcwxvlrmpp48" path="res://assets/scenario_day/road.png" id="3_iywne"]
 [ext_resource type="PackedScene" uid="uid://v4xl2s7bajtn" path="res://scenes/player.tscn" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://blrwwbl3jc2nr" path="res://scripts/player.gd" id="5_iywne"]
+
+[sub_resource type="GDScript" id="GDScript_iywne"]
 
 [node name="game" type="Node2D"]
 
@@ -48,3 +50,8 @@ position = Vector2(564, 461.00003)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("5_iywne")
 speed = 300.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(40, -453.3335)
+limit_enabled = false
+script = SubResource("GDScript_iywne")
