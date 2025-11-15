@@ -4,14 +4,17 @@ extends Area2D
 
 var screen : Rect2
 var ground : float
+var game : Node
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	game = get_tree().current_scene
+	connect("area_entered", Callable(self, "_on_area_entered")) 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var dx = Input.get_axis("player_left", "player_right")
-	
 	position.x += dx * speed * delta
+	
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemies"):
+		game.retroceder_inimigos()
