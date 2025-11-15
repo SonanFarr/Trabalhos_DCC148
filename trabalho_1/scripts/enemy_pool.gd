@@ -29,7 +29,6 @@ func instancia_objetos(cena: Node) -> void:
 func esta_disponivel(obj: Node2D) -> bool:
 	return obj.process_mode == Node.PROCESS_MODE_DISABLED
 
-
 func get_from_pool() -> Node2D:
 	for obj in lista_objetos:
 		if esta_disponivel(obj):

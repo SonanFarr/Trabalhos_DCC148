@@ -12,7 +12,7 @@
 [node name="game" type="Node2D"]
 script = ExtResource("1_u5sy4")
 objeto = ExtResource("2_gee14")
-num_objetos = 10
+num_objetos = 1
 
 [node name="Paralax" type="Node2D" parent="."]
 
