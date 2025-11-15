@@ -1,39 +1,60 @@
 extends Area2D
 
-#@export var speed : float
-var speed = 200
+var speed := 200
 
 var origin: Vector2
 var target := Vector2.ZERO
 var recuo_target: Vector2
 var is_recuing := false
 
-func _ready():
+var sprite
+var original_scale: Vector2
+var min_scale := Vector2(0.3, 0.3)
+
+func _ready() -> void:
 	add_to_group("enemies")
+
+	sprite = get_node("Sprite2D")
+	original_scale = sprite.scale
 
 func set_target(p: Vector2) -> void:
 	target = p
 	origin = global_position
+	sprite.scale = min_scale
 
 func _process(delta: float) -> void:
 	var dir = (target - global_position).normalized()
-	
+
 	if is_recuing:
 		global_position = global_position.move_toward(recuo_target, speed * delta)
+
+		var dist_atual = global_position.distance_to(target)
+		var dist_total = origin.distance_to(target)
+		var t = clamp(dist_atual / dist_total, 0.0, 1.0)
+
+		sprite.scale = min_scale.lerp(original_scale, 1.0 - t)
+
 		if global_position.distance_to(recuo_target) < 1.0:
 			is_recuing = false
 		return
-	
+
 	global_position += dir * speed * delta
-	
+
+	var dist_atual = global_position.distance_to(target)
+	var dist_total = origin.distance_to(target)
+	var t = clamp(dist_atual / dist_total, 0.0, 1.0)
+
+	sprite.scale = min_scale.lerp(original_scale, 1.0 - t)
+
 	if process_mode == Node.PROCESS_MODE_INHERIT:
-				if global_position.distance_to(target) < 10:
-					hide()
-					process_mode = Node.PROCESS_MODE_DISABLED
+		if global_position.distance_to(target) < 10:
+			hide()
+			process_mode = Node.PROCESS_MODE_DISABLED
 
 func retroceder(frac: float) -> void:
 	var dist = global_position.distance_to(origin)
 	var recuar_dist = dist * frac
-	
+
 	recuo_target = global_position.move_toward(origin, recuar_dist)
+
 	is_recuing = true
