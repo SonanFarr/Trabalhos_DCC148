@@ -1,8 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://db88qenmcigx5"]
+[gd_scene load_steps=7 format=3 uid="uid://db88qenmcigx5"]
 
-[ext_resource type="Script" uid="uid://cgc4tdfqgohmv" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bseo5mq2oq0d2" path="res://scenes/cenario.tscn" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://bwjjglvps2dpt" path="res://scenes/enemy.tscn" id="2_gee14"]
 [ext_resource type="Texture2D" uid="uid://bvfafrvsbg4qm" path="res://assets/scenario_day/sky.png" id="2_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cwcwxvlrmpp48" path="res://assets/scenario_day/road.png" id="3_iywne"]
 [ext_resource type="PackedScene" uid="uid://v4xl2s7bajtn" path="res://scenes/player.tscn" id="4_lbhrr"]
@@ -10,9 +8,7 @@
 [ext_resource type="Script" uid="uid://blrwwbl3jc2nr" path="res://scripts/player.gd" id="5_iywne"]
 
 [node name="game" type="Node2D"]
-script = ExtResource("1_u5sy4")
-objeto = ExtResource("2_gee14")
-num_objetos = 1
+position = Vector2(579, 326)
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -21,25 +17,22 @@ repeat_size = Vector2(1150, 0)
 
 [node name="TextureRect" parent="Paralax/sky" index="0"]
 texture = ExtResource("2_lbhrr")
+metadata/_edit_use_anchors_ = true
 
 [node name="road" parent="Paralax" instance=ExtResource("1_uwrxv")]
 
 [node name="TextureRect" parent="Paralax/road" index="0"]
 texture = ExtResource("3_iywne")
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_p57ef")
+speed = 300.0
 
 [node name="Player" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(0, 162.99998)
 scale = Vector2(0.2, 0.2)
 script = ExtResource("5_iywne")
-speed = 300.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 1.5258789e-05)
-scale = Vector2(0.99999994, 0.99999994)
-script = ExtResource("4_p57ef")
-speed = 300.0
-
-[node name="ObjectPool" type="Node" parent="."]
 
 [editable path="Paralax/sky"]
 [editable path="Paralax/road"]
