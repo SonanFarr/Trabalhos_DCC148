@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://c63qyyhpk7qc4"]
+
+[ext_resource type="Script" uid="uid://c4qdegph1w1ov" path="res://scripts/tela_inicial.gd" id="1_hkbxb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_hkbxb")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "
+
+Enduine"
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "
+
+
+
+
+
+
+
+
+
+Um jogo de corrida baseado no Enduro do Atari ambientado na corrida de pods
+ do Anakin Skywalker no episódio 1 de Star War, The Phantom Manace."
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 40
+text = "Iniciar"
+
+[connection signal="pressed" from="PanelContainer/Button" to="." method="_on_button_pressed"]

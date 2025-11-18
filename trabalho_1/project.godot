@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="trabalho_1"
-run/main_scene="uid://db88qenmcigx5"
+run/main_scene="uid://c63qyyhpk7qc4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

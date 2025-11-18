@@ -18,3 +18,4 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		game.retroceder_inimigos()
+		game.update_life()

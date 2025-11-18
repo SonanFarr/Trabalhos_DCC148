@@ -71,14 +71,12 @@ offset_left = -323.0
 offset_top = 226.0
 offset_right = -152.0
 offset_bottom = 274.0
-theme_override_font_sizes/font_size = 40
 
 [node name="lifes" type="Label" parent="UI"]
 offset_left = -531.0
 offset_top = 228.0
 offset_right = -358.0
 offset_bottom = 277.0
-theme_override_font_sizes/font_size = 40
 
 [editable path="Paralax/sky"]
 [editable path="Paralax/road"]
