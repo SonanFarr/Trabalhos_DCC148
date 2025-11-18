@@ -11,6 +11,9 @@ var sprite
 var original_scale: Vector2
 var min_scale := Vector2(0.3, 0.3)
 
+var scenario := "day"
+var fog_marker_y := 0.0
+
 func _ready() -> void:
 	add_to_group("enemies")
 
@@ -24,7 +27,24 @@ func set_target(p: Vector2) -> void:
 
 func _process(delta: float) -> void:
 	var dir = (target - global_position).normalized()
-
+	
+	if scenario == "day":
+		self.sprite.texture = load("res://assets/enemy/enemy.png")
+	
+	if scenario == "fog":
+		self.sprite.texture = load("res://assets/enemy/enemy.png")
+		if global_position.y >= fog_marker_y:
+			self.show()
+		else:
+			self.hide()
+			
+	if scenario == "night":
+		self.sprite.texture = load("res://assets/enemy/enemy_night.png")
+		if global_position.y >= fog_marker_y:
+			self.sprite.texture = load("res://assets/enemy/enemy.png")
+		else:
+			self.sprite.texture = load("res://assets/enemy/enemy_night.png")
+	
 	if is_recuing:
 		global_position = global_position.move_toward(recuo_target, speed * delta)
 

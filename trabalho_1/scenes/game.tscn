@@ -55,5 +55,8 @@ position = Vector2(-6, 198)
 [node name="road_bottom_3" type="Marker2D" parent="Markers"]
 position = Vector2(228, 184)
 
+[node name="fog_marker" type="Marker2D" parent="Markers"]
+position = Vector2(0, -40)
+
 [editable path="Paralax/sky"]
 [editable path="Paralax/road"]
