@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		change_scenario()
 
 func retroceder_inimigos() -> void:
-	var frac := 0.6
+	var frac := 0.8
 	
 	for enemy in pool.lista_objetos:
 		if enemy.process_mode == Node.PROCESS_MODE_INHERIT:

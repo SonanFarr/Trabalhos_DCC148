@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 	sprite.scale = min_scale.lerp(original_scale, 1.0 - t)
 
 	if process_mode == Node.PROCESS_MODE_INHERIT:
-		if global_position.distance_to(target) < 10:
+		if global_position.distance_to(target) < 30:
 			hide()
 			process_mode = Node.PROCESS_MODE_DISABLED
 
