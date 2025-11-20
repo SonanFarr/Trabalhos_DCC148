@@ -53,13 +53,13 @@ speed = 300.0
 position = Vector2(2, -152)
 
 [node name="road_bottom_1" type="Marker2D" parent="Markers"]
-position = Vector2(-284, 189)
+position = Vector2(-339, 167)
 
 [node name="road_bottom_2" type="Marker2D" parent="Markers"]
-position = Vector2(-6, 198)
+position = Vector2(-4, 163)
 
 [node name="road_bottom_3" type="Marker2D" parent="Markers"]
-position = Vector2(228, 184)
+position = Vector2(263, 165)
 
 [node name="fog_marker" type="Marker2D" parent="Markers"]
 position = Vector2(0, -40)

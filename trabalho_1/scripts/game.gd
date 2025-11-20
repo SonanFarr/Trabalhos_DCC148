@@ -6,6 +6,7 @@ extends Node2D
 var pool : ObjectPool
 var spawn_timer := 0.0
 var spawn_interval := 2.0
+var total_recuing := 0
 
 var scenarios := ["day", "night", "fog"]
 var index_scenario := 0
@@ -13,7 +14,7 @@ var time_scenario := 0.0
 var change_interval := 10.0
 
 var distance := 0.0
-var lifes := 2
+var lifes := 5
 
 func _ready() -> void:
 	pool = ObjectPool.new(objeto, num_objetos, "Enemy", self)
@@ -22,7 +23,7 @@ func _ready() -> void:
 	change_scenario()
 	
 	$UI/distance.text = "Distance: " + String.num(distance, 2)
-	$UI/lifes.text = "Lives: " + str(lifes)
+	$UI/lifes.text = "Lifes: " + str(lifes)
 
 func change_scenario() -> void:
 	var name = scenarios[index_scenario]
@@ -37,16 +38,23 @@ func change_scenario() -> void:
 
 	sky_texrect.texture = load(sky_path)
 	road_texrect.texture = load(road_path)
-
-	print("Cenário trocado para:", name)
+	
+	if(name == "day"):
+		spawn_interval = 2.0
+	else:
+		spawn_interval = 5.0
 
 func _physics_process(delta: float) -> void:
 	
 	distance += delta * 2
 	$UI/distance.text = "Distance: " + String.num(distance, 2)
 	
+	if (total_recuing >= 1):
+		spawn_timer = spawn_interval
+		time_scenario = 0.0
+	
 	spawn_timer -= delta
-	if spawn_timer <= 0:
+	if (spawn_timer <= 0) and (total_recuing <= 0):
 		spawn_timer = spawn_interval
 		var enemy = pool.get_from_pool()
 		
@@ -68,13 +76,17 @@ func _physics_process(delta: float) -> void:
 			enemy.fog_marker_y = $Markers/fog_marker.global_position.y
 	
 	time_scenario += delta
-	if time_scenario >= change_interval:
+	if (time_scenario >= change_interval) and (total_recuing <= 0):
 		time_scenario = 0
 		index_scenario = (index_scenario + 1) % scenarios.size()
 		change_scenario()
 
-func retroceder_inimigos() -> void:
-	var frac := 0.8
+func recoil_enemies() -> void:
+	var frac := 1.0
+	
+	for enemy in pool.lista_objetos:
+		if enemy.process_mode == Node.PROCESS_MODE_INHERIT:
+			total_recuing += 1
 	
 	for enemy in pool.lista_objetos:
 		if enemy.process_mode == Node.PROCESS_MODE_INHERIT:
@@ -88,6 +100,4 @@ func update_life() -> void:
 		game_over()
 
 func game_over() -> void:
-	print("GAME OVER")
-	#get_tree().reload_current_scene()
 	get_tree().change_scene_to_file("res://scenes/tela_game_over.tscn")

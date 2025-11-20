@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 		self.sprite.texture = load("res://assets/enemy/enemy.png")
 	
 	if scenario == "fog":
-		self.sprite.texture = load("res://assets/enemy/enemy.png")
+		self.sprite.texture = load("res://assets/enemy/enemy_night.png")
 		if global_position.y >= fog_marker_y:
 			self.show()
 		else:
@@ -40,11 +40,7 @@ func _process(delta: float) -> void:
 			
 	if scenario == "night":
 		self.sprite.texture = load("res://assets/enemy/enemy_night.png")
-		if global_position.y >= fog_marker_y:
-			self.sprite.texture = load("res://assets/enemy/enemy.png")
-		else:
-			self.sprite.texture = load("res://assets/enemy/enemy_night.png")
-	
+
 	if is_recuing:
 		global_position = global_position.move_toward(recuo_target, speed * delta)
 
@@ -55,7 +51,12 @@ func _process(delta: float) -> void:
 		sprite.scale = min_scale.lerp(original_scale, 1.0 - t)
 
 		if global_position.distance_to(recuo_target) < 1.0:
+			if (scenario == "day") or (scenario == "night"):
+				self.hide()
 			is_recuing = false
+			if (scenario == "day") or (scenario == "night"):
+				self.show()
+			get_tree().get_root().get_node("game").total_recuing -= 1
 		return
 
 	global_position += dir * speed * delta
@@ -67,7 +68,7 @@ func _process(delta: float) -> void:
 	sprite.scale = min_scale.lerp(original_scale, 1.0 - t)
 
 	if process_mode == Node.PROCESS_MODE_INHERIT:
-		if global_position.distance_to(target) < 30:
+		if global_position.distance_to(target) < 10:
 			hide()
 			process_mode = Node.PROCESS_MODE_DISABLED
 
