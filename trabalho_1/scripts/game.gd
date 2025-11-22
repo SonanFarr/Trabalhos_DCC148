@@ -46,8 +46,9 @@ func change_scenario() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	distance += delta * 2
-	$UI/distance.text = "Distance: " + String.num(distance, 2)
+	if (total_recuing) <= 0:
+		distance += delta * 2
+		$UI/distance.text = "Distance: " + String.num(distance, 2)
 	
 	if (total_recuing >= 1):
 		spawn_timer = spawn_interval

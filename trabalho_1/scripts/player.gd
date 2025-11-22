@@ -22,13 +22,14 @@ func blink_player():
 		tween.tween_property(sprite, "modulate:a", 1.0, 0.1)
 
 func _process(delta: float) -> void:
-	var dx = Input.get_axis("player_left", "player_right")
-	position.x += dx * speed * delta
-	global_position.x = clamp(
-		global_position.x,
-		left_limit.global_position.x,
-		right_limit.global_position.x
-	)
+	if (game.total_recuing <= 0):
+		var dx = Input.get_axis("player_left", "player_right")
+		position.x += dx * speed * delta
+		global_position.x = clamp(
+			global_position.x,
+			left_limit.global_position.x,
+			right_limit.global_position.x
+		)
 	
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
